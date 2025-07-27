@@ -27,6 +27,8 @@ public class LessonController {
         return lessonService.getAllLessons();
     }
 
+    //the categoryId within the {} in the getmapping is related to the PathVariable as a parameter
+    //Moreover, RequestMapping is within the GET mapping annotation
     @GetMapping("category/{categoryId}")
     public List<Lesson> getAllLessonsByCategory(@PathVariable Long categoryId){
         return lessonService.getLessonByCategory(categoryId);
