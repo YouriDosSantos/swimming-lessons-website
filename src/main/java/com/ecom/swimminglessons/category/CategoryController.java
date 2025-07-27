@@ -18,15 +18,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:5173") //deal with CORS error when Front End was installed and tried to fetch list of lessons
 public class CategoryController { //Controller handles incoming API Requests
 
-
-    //to get the categories we need a repository
-    //we need an instance of service in controller
-//        private final CategoryService categoryService;
-
-//        public CategoryController(CategoryService categoryService){
-//            this.categoryService = categoryService;
-//        }
-
+    // this was used before
     //need to respond to GET request
 //        @GetMapping
 //        public List<Category> getAllCategories() {
