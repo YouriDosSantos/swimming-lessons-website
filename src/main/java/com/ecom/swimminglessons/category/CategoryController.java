@@ -4,10 +4,7 @@ import com.ecom.swimminglessons.datatransfer.CategoryDto;
 import com.ecom.swimminglessons.model.Category;
 import com.ecom.swimminglessons.repository.CategoryRepository;
 import com.ecom.swimminglessons.service.CategoryService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +34,21 @@ public class CategoryController { //Controller handles incoming API Requests
     @GetMapping
     public List<CategoryDto> getAllCategories(){
         return categoryService.getAllCategories();
+    }
+
+    @PostMapping
+    public CategoryDto createCategory(@RequestBody CategoryDto categoryDto) {
+        return categoryService.createCategory(categoryDto);
+    }
+
+    @PutMapping("/{id}")
+    public CategoryDto updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDto){
+        return categoryService.updateCategory(id, categoryDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Long id){
+        categoryService.deleteCategory(id);
     }
 
 }

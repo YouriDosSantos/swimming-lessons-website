@@ -25,6 +25,7 @@ public class Lesson {
     //nullable = false, every lesson must have a category
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    @JsonIgnoreProperties({"lessons"})
+//    @JsonIgnoreProperties({"lessons"})
+    @JsonBackReference
     private Category category;
 }

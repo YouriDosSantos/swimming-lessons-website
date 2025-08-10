@@ -28,10 +28,30 @@ public class CategoryService { //Handles Business Logic
     //NEW
     public Category getCategoryById(Long id){
         return categoryRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Category not found"));
+                .orElseThrow(()-> new RuntimeException("Category not found: " + id));
     }
 
     public List<CategoryDto> getAllCategories(){
         return categoryRepository.findAll().stream().map(category -> new CategoryDto(category.getId(), category.getName())).collect(Collectors.toList());
     }
+
+    public CategoryDto createCategory(CategoryDto categoryDto) {
+        Category category = new Category();
+        category.setName(categoryDto.name());
+        Category saved = categoryRepository.save(category);
+        return new CategoryDto(saved.getId(), saved.getName());
+    }
+
+    public CategoryDto updateCategory(Long id, CategoryDto categoryDto) {
+        Category category = getCategoryById(id);
+        category.setName(categoryDto.name());
+        Category updated = categoryRepository.save(category);
+        return new CategoryDto(updated.getId(), updated.getName());
+    }
+
+    public void deleteCategory(Long id){
+        categoryRepository.deleteById(id);
+    }
+
+
 }
