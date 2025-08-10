@@ -29,7 +29,7 @@ function App() {
     fetch('http://localhost:8080/api/lessons')
     .then(response => response.json())
     .then(data => setLessons(data));
-
+   
     fetch('http://localhost:8080/api/categories')
     .then(response => response.json())
     .then(data => setCategories(data));
@@ -55,7 +55,7 @@ function App() {
   const filteredLessons = lessons
     .filter(lesson => {
       return (
-        (selectedCategory ? lesson.category.id === selectedCategory : true) 
+        (selectedCategory ? lesson.categoryId === selectedCategory : true) 
         &&
         lesson.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
