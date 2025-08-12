@@ -23,7 +23,7 @@ public class Lesson {
     //many Lessons belong to a single category
     //there will be a foreign_id column called category_id
     //nullable = false, every lesson must have a category
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
 //    @JsonIgnoreProperties({"lessons"})
     @JsonBackReference

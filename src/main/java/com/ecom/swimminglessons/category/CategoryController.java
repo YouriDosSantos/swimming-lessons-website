@@ -4,6 +4,8 @@ import com.ecom.swimminglessons.datatransfer.CategoryDto;
 import com.ecom.swimminglessons.model.Category;
 import com.ecom.swimminglessons.repository.CategoryRepository;
 import com.ecom.swimminglessons.service.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,18 +39,21 @@ public class CategoryController { //Controller handles incoming API Requests
     }
 
     @PostMapping
-    public CategoryDto createCategory(@RequestBody CategoryDto categoryDto) {
-        return categoryService.createCategory(categoryDto);
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
+        CategoryDto created = categoryService.createCategory(categoryDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public CategoryDto updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDto){
-        return categoryService.updateCategory(id, categoryDto);
+    public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDto){
+        CategoryDto updated = categoryService.updateCategory(id, categoryDto);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable Long id){
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id){
         categoryService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
