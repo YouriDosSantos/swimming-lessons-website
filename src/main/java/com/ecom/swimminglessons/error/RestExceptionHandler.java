@@ -2,6 +2,7 @@ package com.ecom.swimminglessons.error;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.validator.internal.util.logging.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -20,7 +22,7 @@ public class RestExceptionHandler {
 
     private Map<String, Object> buildErrorResponse(String error, String message, HttpStatus status) {
         Map<String, Object> body = new HashMap<>();
-        body.put("timestamps", Instant.now().toString());
+        body.put("timestamp", Instant.now().toString());
         body.put("status", status.value());
         body.put("error", error);
         body.put("message", message);
@@ -58,7 +60,6 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(buildErrorResponse("CONSTRAINT_VIOLATION", errors, HttpStatus.BAD_REQUEST));
     }
-
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String,Object>> handleAny(Exception ex) {

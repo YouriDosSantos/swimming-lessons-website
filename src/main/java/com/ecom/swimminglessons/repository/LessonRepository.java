@@ -2,6 +2,7 @@ package com.ecom.swimminglessons.repository;
 
 import com.ecom.swimminglessons.model.Lesson;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     //This works because your Lesson entity has a field named category which is a @ManyToOne with a Category entity.
     //JPA knows how to reach category.id via categoryId.
     List<Lesson> findByCategoryId(Long categoryId);
+
+    @Query("SELECT lesson FROM Lesson lesson JOIN FETCH lesson.category")
+    List<Lesson> findAllWithCategory();
+
 }

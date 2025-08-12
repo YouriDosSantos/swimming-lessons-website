@@ -4,6 +4,7 @@ import com.ecom.swimminglessons.datatransfer.CategoryDto;
 import com.ecom.swimminglessons.model.Category;
 import com.ecom.swimminglessons.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class CategoryService { //Handles Business Logic
     //NEW
     public Category getCategoryById(Long id){
         return categoryRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Category not found: " + id));
+                .orElseThrow(()-> new ResourceAccessException("Category not found: " + id));
     }
 
     public List<CategoryDto> getAllCategories(){
